@@ -1,102 +1,90 @@
-import React from "react";
-import Discover from "./discover";
+import React, {useState} from "react";
+import { useNavigate } from 'react-router-dom';
+import './login.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
+import { faLock, faEyeSlash, faUser, faAt, faEye } from '@fortawesome/free-solid-svg-icons';
 
-function Login() {
+function Login({user, setUser}) {
 
+    const navigate = useNavigate();
+
+    const [formData, setFormData] = useState({
+        username: '',
+        password: ''
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+
+
+    const loginFormSubmission = (e) => {
+        e.preventDefault();
+        console.log(`This method ran.`)
+        console.log(e.target.username.value)
+        console.log(e.target.password.value)
+
+        
+
+        const body = {
+            username: e.target.username.value,
+            password: e.target.password.value
+        }
+
+        fetch("http://localhost:3000/auth/login/local",{
+            method: "POST",
+            body: JSON.stringify(body)
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.statusCode === 200) {
+                    console.log('Success!')
+                    localStorage.setItem('user', JSON.stringify(result.data))
+                    navigate('/discover')
+                } else {
+                    console.log("Something went wrong!")
+                }
+            })
+            .catch((error) => console.log('There was a problem fetching the data: ', error))
+    }
+
+    const handleNavigation = () => {
+        navigate('/signup')
+    }
 
     return (
-        <div>
-            {/* <!--Login Form--> */}
+        <form onSubmit={loginFormSubmission}>
             <div className="container">
-                <div className="forms">
-                    <div className="form login">
-                        <span className="title">Login</span>
-                        
-                        <form action="#">
-                            <div className="input-field">
-                                <input type="text" placeholder="Enter your e-mail" />
-                                <i className="fa-regular fa-envelope icon"></i>
-                            </div>
-                            <div className="input-field">
-                                <input type="password" className="password" placeholder="Enter your password" />
-                                <i className="fa-solid fa-lock icon"></i>
-                                <i className="fa-solid fa-eye-slash showHidePw"></i>
-                            </div>
-
-                            <div className="checkbox-text">
-                                <div className="checkbox-content">
-                                    <input type="checkbox" id="logCheck" />
-                                    <label htmlFor="logCheck" className="text">Remember me</label>
-                                </div>
-
-                                <a href="#" className="text">Forgot Password?</a>
-                            </div>
-
-                            <div className="input-field button">
-                                <input type="button" value="Login" />
-                            </div>
-                            
-                        </form>
-
-                        <div className="login-signup">
-                            <span className="text">Not a member?
-                                <a href="#" className="text signup-text">Signup</a>
-                            </span>
-                        </div>
-                    </div>
-
-                    {/* <!--registration Form--> */}
-                    <div className="form signup">
-                        <span className="title">Register</span>
-                        
-                        <form action="#">
-                            <div className="input-field">
-                                <input type="text" placeholder="Enter your first name" />
-                                <i className="fa-solid fa-user"></i>
-                            </div>
-                            <div className="input-field">
-                                <input type="text" placeholder="Enter your last name" />
-                                <i className="fa-solid fa-user"></i>
-                            </div>
-                            <div className="input-field">
-                                <input type="text" placeholder="Enter a username" />
-                                <i className="fa-solid fa-at"></i>
-                            </div>
-                            <div className="input-field">
-                                <input type="password" className="password" placeholder="Enter your password" />
-                                <i className="fa-solid fa-lock icon"></i>
-                            </div>
-                            <div className="input-field">
-                                <input type="password" className="password" placeholder="Re-enter your password" />
-                                <i className="fa-solid fa-lock icon"></i>
-                                <i className="fa-solid fa-eye-slash showHidePw"></i>
-                            </div>
-
-                            <div className="checkbox-text">
-                                <div className="checkbox-content">
-                                    <input type="checkbox" id="logCheck" />
-                                    <label htmlFor="logCheck" className="text">Remember me</label>
-                                </div>
-
-                                <a href="#" className="text">Forgot Password?</a>
-                            </div>
-
-                            <div className="input-field button">
-                                <input type="button" value="Signup" />
-                            </div>
-                            
-                        </form>
-
-                        <div className="login-signup">
-                            <span className="text">Already a member?
-                                <a href="#" className="text signup-text">Login</a>
-                            </span>
-                        </div>
+                <div className="header">
+                    <div className="text">Login</div>
+                    <div className="underline"></div>
+                </div>
+                <div className="inputs">
+                    <div className="input">
+                        <FontAwesomeIcon icon={faAt} className="icon"/>
+                        <input type="text" name="username" id="username"  value={formData.username} onChange={handleChange} placeholder="Enter your username"/>
                     </div>
                 </div>
+                <div className="inputs">
+                    <div className="input">
+                        <FontAwesomeIcon icon={faLock} className="icon"/>
+                        <input type="password" name="password" id="password" value={formData.password} onChange={handleChange} placeholder="Enter your password"/>
+                    </div>
+                </div>
+                <div className="forgot-password">Lost Password? <span>Click Here</span></div>
+                <div className="submit-container">
+                    <div className="submit" type="button" onClick={handleNavigation}>Sign Up</div>
+                    <button className="submit" type="submit">Login</button>
+                </div>
             </div>
-        </div>
+        </form>
+        
     )
-} 
+}
 
 export default Login;

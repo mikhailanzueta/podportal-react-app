@@ -1,14 +1,82 @@
 import React from "react";
+import {useState, useEffect} from 'react'
+import { useNavigate, Link } from "react-router-dom";
+import './library.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+    faHouse,
+    faUserPlus,
+    faGear,
+    faBookmark,
+    faArrowRightFromBracket,
+    faBars,
+    faMagnifyingGlass,
+    faCircleUser,
+    faCirclePlay
+  } from '@fortawesome/free-solid-svg-icons';
 
 function Library() {
 
+    useEffect(() => {
+        // This function runs after the component is mounted
+        const handleClick = () => {
+            const bars = document.querySelector('.fa-bars');
+            const sideMenu = document.querySelector('.navigation');
+            
+            // Toggle the "close" class on .navigation when .fa-bars is clicked
+            bars.addEventListener('click', () => {
+                sideMenu.classList.toggle("close");
+            });
 
+
+        };
+
+        // Call the function to set up event listener
+        handleClick();
+
+        // Empty dependency array ensures this effect runs only once after initial render
+    }, []);
+
+      // Base URL for the Podcast Index API
+//   const baseUrl = 'https://api.podcastindex.org/api/1.0';
+//   // Example endpoint: Search for a podcast by term
+//   const endpoint = '/search/byterm';
+//   // Query parameters
+//   const params = new URLSearchParams({
+//     q: 'technology' // Example search term
+//   });
+//   // Full URL with endpoint and query parameters
+//   const url = `${baseUrl}${endpoint}?${params.toString()}`;
+
+//   const [query, setQuery] = useState("")
+//   // create a handler function for search bar and update the state
+//   const handleInputChange = (e) => {
+//     setQuery(e.target.value)
+//     // use fetch hook for state changes
+    
+//   }
+  // create a handler function that calls the fetch request to the api when the uer presses the 'enter' key
+//   const handleKeyPress = (e) => {
+//     if (e.key === 'Enter') {
+//       fetch(url, {
+//         method: "GET",
+//         headers: {
+//           'X-Auth-Key': process.env.REACT_APP_API_KEY,
+//           'X-Auth-Secret': process.env.REACT_REACT_API_SECRET_KEY,
+//           "content-type": "application/json"
+//         }
+//       })
+//         .then((response) => response.json())
+//         .then(result => console.log(result.data))
+//         .catch((error) => console.log('Error fetching data: ', error))
+//     }
+//   }
     return (
         <div>
             <nav className="navigation">
                 <div className="logo-name">
                     <div className="logo-img">
-                        <img src="public/styles/assets/podcast.svg" alt="Podportal" />
+                        <img src="images\podcast.svg" alt="Podportal" />
                     </div>
 
                     <span className="logo_name">Podportal</span>
@@ -16,29 +84,29 @@ function Library() {
 
                 <div className="menu-items">
                     <ul className="nav-links">
-                        <li><a href="index.html">
-                            <i className="fa-solid fa-house"></i>
+                        <li><Link to='/home'>
+                            <FontAwesomeIcon icon={faHouse}></FontAwesomeIcon>
                             <span className="link-name">Home</span>
-                        </a></li>
-                        <li><a href="login.html">
-                            <i className="fa-solid fa-user-plus"></i>
+                        </Link></li>
+                        <li><Link to='/signup'>
+                            <FontAwesomeIcon icon={faUserPlus}></FontAwesomeIcon>
                             <span className="link-name">Signup</span>
-                        </a></li>
-                        <li><a href="#">
-                            <i className="fa-solid fa-gear"></i>
+                        </Link></li>
+                        <li><Link to="">
+                            <FontAwesomeIcon icon={faGear}></FontAwesomeIcon>
                             <span className="link-name">Settings</span>
-                        </a></li>
-                        <li><a href="discover.html">
-                            <i classNameName="fa-solid fa-bookmark"></i>
+                        </Link></li>
+                        <li><Link to='/discover'>
+                            <FontAwesomeIcon icon={faBookmark}></FontAwesomeIcon>
                             <span className="link-name">Discover</span>
-                        </a></li>
+                        </Link></li>
                     </ul>
 
                     <ul className="logout">
-                        <li><a href="#">
-                            <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                        <li><Link to="">
+                            <FontAwesomeIcon icon={faArrowRightFromBracket}></FontAwesomeIcon>
                             <span className="link-name">Logout</span>
-                        </a></li>
+                        </Link></li>
                     </ul>
                 </div>
             </nav>
@@ -46,20 +114,20 @@ function Library() {
             {/* <!--MAIN CONTENT SECTION--> */}
             <section className="playlist">
                 <div className="top">
-                    <i className="fa-solid fa-bars"></i>
+                    <FontAwesomeIcon icon={faBars}></FontAwesomeIcon>
 
                     <div className="search-box">
-                        <i className="fa-solid fa-magnifying-glass"></i>
+                        <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
                         <input type="text" placeholder="Search Here...." />
                     </div>
 
-                    <i className="fa-solid fa-circle-user" id="user-profile"></i>
+                    <FontAwesomeIcon icon={faCircleUser} id="user-profile"></FontAwesomeIcon>
                 </div>
 
                 <div className="playlist-activity">
                     <div className="title">
                         <span className="text">Playlist Activity</span>
-                        <i className="fa-solid fa-circle-play"></i>
+                        <FontAwesomeIcon icon={faCirclePlay}></FontAwesomeIcon>
                     </div>
 
                     <div className="playlist-data">

@@ -1,13 +1,89 @@
 import React from "react";
+import { useEffect, useState } from "react";
+// import {handleInputChange, handleKeyPress} from '../App'
+import { useNavigate, Link } from "react-router-dom";
+import './discover.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+    faHouse,
+    faUserPlus,
+    faGear,
+    faBookmark,
+    faArrowRightFromBracket,
+    faBars,
+    faMagnifyingGlass,
+    faCircleUser,
+    faRadio,
+    faMicrochip,
+    faLandmark,
+    faDumbbell,
+    faFaceGrinTears,
+    faAtom,
+    faMedal,
+    faBook,
+    faMusic,
+    faPodcast,
+    faHandcuffs,
+  } from '@fortawesome/free-solid-svg-icons';
 
-function Discover () {
+function Discover ({hash4Header, apiHeaderTime}) {
+    const navigate = useNavigate()
+
+    const handleLogout = () => {
+
+        fetch(`http://localhost:3000/logout`, {
+          method: "POST",
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log('User is logged out')
+                localStorage.removeItem('user')
+                navigate('/home')
+            })
+            .catch((error) => console.log('There was a problem logging out the user: ', error))
+        
+    }
+
+    const handleData = () => {
+        fetch(`http://localhost:3000/discover/podcasts`, {
+            method: "GET",
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log('result: ', result)
+            })
+            .catch((error) => console.log('Could not fetch your podcasts', error))
+    }
+
+   
+    useEffect(() => {
+        // This function runs after the component is mounted
+        const handleClick = () => {
+            const bars = document.querySelector('.fa-bars');
+            const sideMenu = document.querySelector('.navigation');
+            
+            // Toggle the "close" class on .navigation when .fa-bars is clicked
+            bars.addEventListener('click', () => {
+                sideMenu.classList.toggle("close");
+            });
+
+
+        };
+
+        // Call the function to set up event listener
+        handleClick();
+
+        // Empty dependency array ensures this effect runs only once after initial render
+    }, []);
+
+    
 
     return (
         <div>
             <nav className="navigation">
                 <div className="logo-name">
                     <div className="logo-img">
-                        <img src="public/styles/assets/podcast.svg" alt="Podportal" />
+                        <img src="images\podcast.svg" alt="Podportal" />
                     </div>
 
                     <span className="logo_name">Podportal</span>
@@ -15,29 +91,29 @@ function Discover () {
 
                 <div className="menu-items">
                     <ul className="nav-links">
-                        <li><a href="index.html">
-                            <i className="fa-solid fa-house"></i>
+                        <li><Link to="/home">
+                            <FontAwesomeIcon icon={faHouse} className="icon" />
                             <span className="link-name">Home</span>
-                        </a></li>
-                        <li><a href="login.html">
-                            <i className="fa-solid fa-user-plus"></i>
+                        </Link></li>
+                        <li><Link to="/signup">
+                            <FontAwesomeIcon icon={faUserPlus} className="icon" />
                             <span className="link-name">Signup</span>
-                        </a></li>
-                        <li><a href="#">
-                            <i className="fa-solid fa-gear"></i>
+                        </Link></li>
+                        <li><Link to="">
+                            <FontAwesomeIcon icon={faGear} className="icon" />
                             <span className="link-name">Settings</span>
-                        </a></li>
-                        <li><a href="library.html">
-                            <i className="fa-solid fa-bookmark"></i>
+                        </Link></li>
+                        <li><Link to="/library">
+                            <FontAwesomeIcon icon={faBookmark} className="icon" />
                             <span className="link-name">Library</span>
-                        </a></li>
+                        </Link></li>
                     </ul>
 
                     <ul className="logout">
-                        <li><a href="#">
-                            <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                        <li><Link to="/home" onClick={handleLogout}>
+                            <FontAwesomeIcon icon={faArrowRightFromBracket} className="icon" />
                             <span className="link-name">Logout</span>
-                        </a></li>
+                        </Link></li>
                     </ul>
                 </div>
              </nav>
@@ -45,66 +121,66 @@ function Discover () {
             {/* <!--MAIN CONTENT SECTION--> */}
             <section className="discover">
                 <div className="top">
-                    <i className="fa-solid fa-bars"></i>
+                    <FontAwesomeIcon icon={faBars} className="fa-bars" />
 
                     <div className="search-box">
-                        <i className="fa-solid fa-magnifying-glass"></i>
+                        <FontAwesomeIcon icon={faMagnifyingGlass} className="icon" />
                         <input type="text" placeholder="Search Here...." />
                     </div>
 
-                    <i class="fa-solid fa-circle-user" id="user-profile"></i>
+                    <FontAwesomeIcon icon={faCircleUser} id="user-profile" className="icon" />
                 </div>
 
                 <div className="discover-content">
                     <div className="overview">
                         <div className="title">
                             <span className="text">Discover</span>
-                            <i className="fa-solid fa-radio"></i>
+                            <FontAwesomeIcon icon={faRadio} className="icon" />
                         </div>
 
                         <div className="genre-boxes">
                             <a href="test.html" className="genre box-1" id="1">
-                                <i className="fa-solid fa-microchip"></i>
+                                <FontAwesomeIcon icon={faMicrochip} />
                                 <span className="text">Test</span>
                             </a>
                             <a href="#" className="genre box-2">
-                                <i className="fa-solid fa-landmark"></i>
+                                <FontAwesomeIcon icon={faLandmark} />
                                 <span className="text">Politics</span>
                             </a>
                             <a href="#" className="genre box-3">
-                                <i className="fa-solid fa-dumbbell"></i>
+                                <FontAwesomeIcon icon={faDumbbell} />
                                 <span className="text">Health</span>
                             </a>
                             <a href="#" className="genre box-4">
-                                <i className="fa-solid fa-face-grin-tears"></i>
+                                <FontAwesomeIcon icon={faFaceGrinTears} />
                                 <span className="text">Comedy</span>
                             </a>
                             <a href="#" className="genre box-5">
-                                <i className="fa-solid fa-atom"></i>
+                                <FontAwesomeIcon icon={faAtom} />
                                 <span className="text">Science</span>
                             </a>
                             <a href="#" className="genre box-6">
-                                <i className="fa-solid fa-medal"></i>
+                                <FontAwesomeIcon icon={faMedal} />
                                 <span className="text">Sports</span>
                             </a>
                             <a href="#" className="genre box-7">
-                                <i className="fa-solid fa-medal"></i>
+                                <FontAwesomeIcon icon={faMedal} />
                                 <span className="text">Lifestyle</span>
                             </a>
                             <a href="#" className="genre box-8">
-                                <i className="fa-solid fa-book"></i>
+                                <FontAwesomeIcon icon={faBook} />
                                 <span className="text">Stories</span>
                             </a>
                             <a href="#" className="genre box-9">
-                                <i className="fa-solid fa-music"></i>
+                                <FontAwesomeIcon icon={faMusic} />
                                 <span className="text">Music</span>
                             </a>
                             <a href="#" className="genre box-10">
-                                <i className="fa-solid fa-podcast"></i>
+                                <FontAwesomeIcon icon={faPodcast} />
                                 <span className="text">New Releases</span>
                             </a>
                             <a href="#" className="genre box-11">
-                                <i className="fa-solid fa-handcuffs"></i>
+                                <FontAwesomeIcon icon={faHandcuffs} />
                                 <span className="text">Crime</span>
                             </a>
                         </div>

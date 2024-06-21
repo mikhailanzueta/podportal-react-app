@@ -1,0 +1,313 @@
+/* LIBRARY CSS */
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+    --grey: #A2A7A5;
+    --white: #FFFFFF;
+    --light-mint: #B6D0C7;
+    --black: #000000;
+    --anti-flash-white: #EFEFF0;
+    --dark-purple: #27233A;
+    --davys-gray: #505168;
+    --gunmetal: #292F36;
+    --rick-black: #0D0C1D;
+
+    /* transition */
+    --transition: 0.25s ease-in-out;
+
+    /* padding */
+    --section-padding: 30px;
+
+    /* gradient color */
+    --flourescent-blue: hsl(178, 100%, 49%);
+    --heliotrope-gray: hsl(253, 15%, 70%);
+    --russian-violet: hsl(252, 80%, 16%);
+    --dark-violet: hsl(252, 100%, 12%);
+    --space-cadet: hsl(247, 43%, 20%);
+    --blue-ryb: hsl(221, 100%, 50%);
+    --white: hsl(0, 0%, 100%);
+    --gradient: linear-gradient(to right, var(--flourescent-blue), var(--blue-ryb));
+
+    /* Transitions */
+    --tran-05: all 0.5s ease;
+    --tran-03: all 0.3s ease;
+    --tran-02: all 0.2s ease;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background-color: var(--anti-flash-white);
+}
+
+/* NAVIGATION CSS */
+.navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    padding: 10px 14px;
+    background-color: var(--black);
+    border: solid 2px #242526;
+    transition: var(--tran-05);
+}
+
+.navigation.close {
+    width: 85px;
+    
+}
+
+.navigation .logo-name {
+    display: flex;
+    align-items: center;
+}
+
+.navigation .logo-img {
+    display: flex;
+    min-width: 80px;
+}
+
+.navigation .logo-img img {
+    width: 70px;
+}
+
+.navigation .logo-name .logo_name {
+    font-size: 23px;
+    color: var(--anti-flash-white);
+    font-weight: 600;
+    font-family: "Roboto Condensed";
+    transition: var(--tran-05);
+}
+
+.navigation.close .logo_name {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.navigation .menu-items {
+    margin-top: 40px;
+    height: calc(100% - 130px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-items li {
+    list-style: none;
+}
+.menu-items li a{
+    text-decoration: none;
+    display: flex;
+    height: 50px;
+    align-items: center;
+    position: relative;
+}
+
+.nav-links li a:hover:before {
+    content: "";
+    position: absolute;
+    left: -7px;
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    background-color: var(--light-mint);
+}
+
+.menu-items li a i {
+    margin-right: 10px;
+    font-size: 22px;
+    min-width: 45px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--anti-flash-white);
+}
+
+.menu-items li a .link-name {
+    font-family: "Roboto Condensed";
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--anti-flash-white);
+}
+
+.navigation.close li a .link-name {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.nav-links li a:hover i,
+.nav-links li a:hover .link-name {
+    color: var(--light-mint);
+}
+
+.menu-items .logout {
+    padding-top: 10px;
+    border-top: 2px solid #242526;
+}
+
+.menu-items .logout:hover i,
+.menu-items .logout:hover .link-name {
+    color: var(--light-mint);
+}
+
+.logout li a:hover:before {
+    content: "";
+    position: absolute;
+    left: -7px;
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    background-color: var(--light-mint);
+}
+
+/* DISCOVER SECTION CSS */
+.playlist {
+    position: relative;
+    background: var(--black);
+    left: 250px;
+    min-height: 100vh;
+    width: calc(100% - 250px);
+    padding: 10px 14px;
+    transition: var(--tran-05);
+}
+
+.navigation.close ~ .playlist {
+    left: 85px;
+    width: calc(100% - 85px);
+}
+
+.playlist .top {
+    position: fixed;
+    top: 0;
+    display: flex;
+    left: 250px;
+    padding: 30px 14px;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 250px);
+    transition: var(--tran-05);
+}
+
+.navigation.close ~ .playlist .top {
+    left: 85px;
+    width: calc(100% - 85px);
+}
+
+.playlist .top .fa-bars {
+    font-size: 25px;
+    color: var(--anti-flash-white);
+    cursor: pointer;
+}
+
+.playlist .top .search-box {
+    position: relative;
+    height: 45px;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 30px;
+}
+
+.top .search-box input {
+    position: absolute;
+    border: 1px solid #242526;
+    border-radius: 50px;
+    background-color: var(--black);
+    padding: 0 25px 0 50px;
+    height: 100%;
+    width: 100%;
+    color: var(--anti-flash-white);
+    font-size: 15px;
+}
+
+.top .search-box i {
+    position: absolute;
+    font-size: 20px;
+    color: var(--anti-flash-white);
+    z-index: 1;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+}
+
+.top .fa-circle-user {
+    width: 40px;
+    font-size: 30px;
+    color: var(--anti-flash-white);
+}
+
+/* PLAYLIST CONTENT CSS */
+.playlist .playlist-activity {
+    padding-top: 120px;
+}
+
+.playlist-activity .overview {
+    margin: 0 25px;
+}
+
+.playlist-activity .title {
+    display: flex;
+    align-items: center;
+    margin: 60px 0 30px 0;
+}
+
+.playlist-activity .title .text {
+    color: var(--anti-flash-white);
+    font-size: 35px;
+    font-weight: 600;
+    font-family: "Roboto Condensed";
+    letter-spacing: 1px;
+    margin-left: 20px;
+}
+
+.playlist-activity .title i {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    background-color: var(--gunmetal);
+    color: var(--anti-flash-white);
+    font-size: 26px;
+    border-radius: 6px;
+    left: 16px;
+    top: 1px;
+}
+
+.playlist .playlist-activity .playlist-data {
+    display: flex;
+    background-color: var(--gunmetal);
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    color: var(--anti-flash-white);
+    padding: 0 20px 0 20px;
+}
+
+.playlist-activity .playlist-data {
+    display: flex;
+    /*width: calc(100% / 4 - 15px);*/
+}
+
+.playlist-data .data-list {
+    display: flex;
+    flex-direction: column;
+    color: var(--anti-flash-white);
+    font-size: 17px;
+    margin-top: 20px;
+    white-space: nowrap;
+}
+
+.playlist-data .data-title {
+    font-size: 20px;
+    font-weight: 500;
+    font-family: "Roboto Condensed";
+}
+
