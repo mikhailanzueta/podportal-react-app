@@ -228,12 +228,12 @@ body {
 }
 
 .podcast-list li {
-    width: auto;
+    width: 25%;
     list-style: none;
 }
 
 .podcast-card {
-    width: 20%;
+    width: auto;
     border-radius: 4px;
 }
 
@@ -298,7 +298,7 @@ body {
     text-decoration: underline var(--davys-gray);
 }
 
-.card-content h3 {
+.card-content h4 {
     color: white;
 }
 
@@ -629,6 +629,10 @@ hr {
     .podcast-list {
         display: grid;
         grid-template-columns: 1fr 1fr;
+    }
+
+    .podcast-list li {
+        width: auto;
     }
 
     footer {

@@ -85,26 +85,26 @@ function Library() {
                 <div className="menu-items">
                     <ul className="nav-links">
                         <li><Link to='/home'>
-                            <FontAwesomeIcon icon={faHouse}></FontAwesomeIcon>
+                            <FontAwesomeIcon icon={faHouse} className="icon"></FontAwesomeIcon>
                             <span className="link-name">Home</span>
                         </Link></li>
                         <li><Link to='/signup'>
-                            <FontAwesomeIcon icon={faUserPlus}></FontAwesomeIcon>
+                            <FontAwesomeIcon icon={faUserPlus} className="icon"></FontAwesomeIcon>
                             <span className="link-name">Signup</span>
                         </Link></li>
                         <li><Link to="">
-                            <FontAwesomeIcon icon={faGear}></FontAwesomeIcon>
+                            <FontAwesomeIcon icon={faGear} className="icon"></FontAwesomeIcon>
                             <span className="link-name">Settings</span>
                         </Link></li>
                         <li><Link to='/discover'>
-                            <FontAwesomeIcon icon={faBookmark}></FontAwesomeIcon>
+                            <FontAwesomeIcon icon={faBookmark} className="icon"></FontAwesomeIcon>
                             <span className="link-name">Discover</span>
                         </Link></li>
                     </ul>
 
                     <ul className="logout">
                         <li><Link to="">
-                            <FontAwesomeIcon icon={faArrowRightFromBracket}></FontAwesomeIcon>
+                            <FontAwesomeIcon icon={faArrowRightFromBracket} className="icon"></FontAwesomeIcon>
                             <span className="link-name">Logout</span>
                         </Link></li>
                     </ul>
@@ -114,20 +114,20 @@ function Library() {
             {/* <!--MAIN CONTENT SECTION--> */}
             <section className="playlist">
                 <div className="top">
-                    <FontAwesomeIcon icon={faBars}></FontAwesomeIcon>
+                    <FontAwesomeIcon icon={faBars} className="icon"></FontAwesomeIcon>
 
                     <div className="search-box">
-                        <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
+                        <FontAwesomeIcon icon={faMagnifyingGlass} className="icon"></FontAwesomeIcon>
                         <input type="text" placeholder="Search Here...." />
                     </div>
 
-                    <FontAwesomeIcon icon={faCircleUser} id="user-profile"></FontAwesomeIcon>
+                    <FontAwesomeIcon icon={faCircleUser} id="user-profile" className="icon"></FontAwesomeIcon>
                 </div>
 
                 <div className="playlist-activity">
                     <div className="title">
                         <span className="text">Playlist Activity</span>
-                        <FontAwesomeIcon icon={faCirclePlay}></FontAwesomeIcon>
+                        <FontAwesomeIcon icon={faCirclePlay} className="icon"></FontAwesomeIcon>
                     </div>
 
                     <div className="playlist-data">

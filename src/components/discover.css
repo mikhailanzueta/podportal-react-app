@@ -123,7 +123,6 @@ body {
     margin-right: 10px;
     font-size: 22px;
     min-width: 45px;
-    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -255,19 +254,18 @@ body {
 .discover-content .title {
     display: flex;
     align-items: center;
-    margin: 60px 0 30px 0;
+    margin: 60px 0 30px 80px;
+    
 }
 
-.discover-content .title .icon {
+.discover-content .icon {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 40px;
+    height: 34px;
     width: 40px;
-    background-color: var(--gunmetal);
     color: var(--anti-flash-white);
-    font-size: 24px;
     border-radius: 6px;
     left: 16px;
     top: 1px;
@@ -282,76 +280,146 @@ body {
     margin-left: 20px;
 }
 
-.discover-content .genre-boxes {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 16px;
+.podcasts {
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 12px;
+    padding: var(--section-padding) 0;
 }
 
-.discover-content .genre-boxes .genre {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: calc(100% / 5 - 15px);
-    border-radius: 12px;
-    padding: 15px 20px;
-    margin-top: 15px;
-    text-decoration: none;
-    color: var(--black);
+.podcast-list {
+    display: grid;
+    flex-direction: row;
+    gap: 25px;
+    grid-template-columns: repeat(auto-fill, min-max(200px, 1fr));
+    grid-template-rows: auto;
 }
 
-.genre-boxes .genre .icon {
-    font-size: 20px;
+.podcast-list li {
+    list-style: none;
 }
 
-.genre-boxes .genre .text {
-    white-space: nowrap;
-    padding: 12px 0;
-    font-size: 24px;
-    font-weight: 500;
+.podcast-card {
+    border-radius: 4px;
+}
+
+.card-banner {
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 20px;
+}
+
+.card-banner img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 200px; /* Adjust this value to the maximum height you want */
+    object-fit: cover; /* Ensures the image covers the entire space */
+    border-radius: 8px; /* Example: Adds rounded corners */
+}
+
+.card-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+}
+
+.podcast-card:is(:hover, :focus) .card-banner::before {
+    background: hsla(0, 0%, 100%, 0.1);
+  }
+
+.card-banner-icon {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-items: center;
+    color: var(--white);
+    border-radius: 50%;
+    font-size: 32px;
+    transition: var(--transition);
+}
+
+.podcast-card:is(:hover, :focus) .card-banner-icon {
+    background: var(--white);
+    color: var(--dark-purple);
+}
+
+.card-meta {
+    color: var(--white);
+    font-size: 15px;
+    margin-bottom: 10px;
     font-family: "Roboto Condensed";
 }
 
-.box-1 {
-    background-color: var(--light-mint);
+.card-meta time {
+    text-decoration: underline var(--davys-gray);
 }
 
-.box-2 {
-    background-color: #C44536;
+.pod-episode {
+    text-decoration: underline var(--davys-gray);
 }
 
-.box-3 {
-    background-color: #FAEDCA;
+.card-content h4 {
+    color: white;
 }
-.box-4 {
-    background-color: #9799CA
+
+.card-content h3::before {
+    content: "";
+    background-color: var(--gradient);
+    position: absolute;
+    left: 0;
+    height: 2px;
+    width: 0;
+    transition: var(--transition)
 }
-.box-5 {
-    background-color: #F5B700;
+
+.card-content h3:hover::before {
+    content: "";
+    background-color: var(--gradient);
+    position: absolute;
+    left: 0;
+    height: 2px;
+    width: 100%;
 }
-.box-6 {
-    background-color: #00A1E4;
+
+
+.audio-player {
+    position: fixed;
+    margin-bottom: 30px;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f1f1f1; /* Optional: for visibility */
+    border-radius: 50px;
 }
-.box-7 {
-    background-color: var(--light-mint)
+
+audio {
+    display: block;
 }
-.box-8 {
-    background-color: #C44536;
+
+.close-btn {
+    position: absolute;
+    color: var(--black);
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 10px;
 }
-.box-9 {
-    background-color: #FAEDCA;
-}
-.box-10 {
-    background-color: #9799CA
-}
-.box-11 {
-    background-color: #F5B700;
-}
+
+
 
 
 @media screen and (max-width: 560px) {
+    .discover-content .overview {
+        margin: 0px 150px 0px 0px;
+    }
+
     .discover-content .genre-boxes .genre {
         width: 100%
     }

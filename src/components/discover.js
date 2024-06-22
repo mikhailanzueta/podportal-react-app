@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 // import {handleInputChange, handleKeyPress} from '../App'
 import { useNavigate, Link } from "react-router-dom";
 import './discover.css'
@@ -14,67 +14,86 @@ import {
     faMagnifyingGlass,
     faCircleUser,
     faRadio,
-    faMicrochip,
-    faLandmark,
-    faDumbbell,
-    faFaceGrinTears,
-    faAtom,
-    faMedal,
-    faBook,
-    faMusic,
-    faPodcast,
-    faHandcuffs,
+    faCirclePlay,
+    faXmark
   } from '@fortawesome/free-solid-svg-icons';
 
 function Discover ({hash4Header, apiHeaderTime}) {
+    const [randomPodcasts, setRandomPodcasts] = useState([]);
+    const [currentAudioUrl, setCurrentAudioUrl] = useState('')
+    const [menuToggle, setMenuToggle] = useState(false)
+    const audioPlayerRef = useRef(null);
     const navigate = useNavigate()
 
-    const handleLogout = () => {
+    // const handleLogout = () => {
 
-        fetch(`http://localhost:3000/logout`, {
-          method: "POST",
-        })
-            .then((response) => response.json())
-            .then((result) => {
-                console.log('User is logged out')
-                localStorage.removeItem('user')
-                navigate('/home')
-            })
-            .catch((error) => console.log('There was a problem logging out the user: ', error))
+    //     fetch(`http://localhost:3000/logout`, {
+    //       method: "POST",
+    //     })
+    //         .then((response) => response.json())
+    //         .then((result) => {
+    //             console.log('User is logged out')
+    //             localStorage.removeItem('user')
+    //             navigate('/home')
+    //         })
+    //         .catch((error) => console.log('There was a problem logging out the user: ', error))
         
-    }
+    // }
 
-    const handleData = () => {
-        fetch(`http://localhost:3000/discover/podcasts`, {
-            method: "GET",
+    useEffect(() => {
+        fetch('http://localhost:3000/discover/podcasts')
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Random Podcasts:', data);
+            setRandomPodcasts(data.data); // Set the fetched random podcasts to state
         })
-            .then((response) => response.json())
-            .then((result) => {
-                console.log('result: ', result)
-            })
-            .catch((error) => console.log('Could not fetch your podcasts', error))
-    }
+        .catch((error) => console.error('Could not fetch your podcasts', error));
+    }, []); 
 
    
     useEffect(() => {
-        // This function runs after the component is mounted
-        const handleClick = () => {
-            const bars = document.querySelector('.fa-bars');
-            const sideMenu = document.querySelector('.navigation');
-            
-            // Toggle the "close" class on .navigation when .fa-bars is clicked
-            bars.addEventListener('click', () => {
-                sideMenu.classList.toggle("close");
-            });
+        console.log('state changed')
+    },[menuToggle])
+    // This function runs after the component is mounted
+    const handleClick = () => {
+        
+        const bars = document.querySelector('.fa-bars');
+        const sideMenu = document.querySelector('.navigation');
+        
+        // Toggle the "close" class on .navigation when .fa-bars is clicked
+        bars.addEventListener('click', () => {
+            sideMenu.classList.toggle("close");
+            setMenuToggle(!menuToggle)
+        });
+        
 
 
-        };
+    };
 
-        // Call the function to set up event listener
-        handleClick();
-
-        // Empty dependency array ensures this effect runs only once after initial render
-    }, []);
+    const handlePodcastClick = (enclosureUrl) => {
+        if (currentAudioUrl === enclosureUrl) {
+          // If the same podcast is clicked, toggle play/pause
+          if (audioPlayerRef.current.paused) {
+            audioPlayerRef.current.play();
+          } else {
+            audioPlayerRef.current.pause();
+          }
+        } else {
+          // If a different podcast is clicked, update the URL
+          setCurrentAudioUrl(enclosureUrl);
+        }
+      };
+    
+      useEffect(() => {
+        if (audioPlayerRef.current && currentAudioUrl) {
+          audioPlayerRef.current.src = currentAudioUrl;
+          audioPlayerRef.current.play();
+        }
+      }, [currentAudioUrl]);
+    
+      const handleAudioEnded = () => {
+        setCurrentAudioUrl(null);
+      }
 
     
 
@@ -110,7 +129,7 @@ function Discover ({hash4Header, apiHeaderTime}) {
                     </ul>
 
                     <ul className="logout">
-                        <li><Link to="/home" onClick={handleLogout}>
+                        <li><Link to="/home">
                             <FontAwesomeIcon icon={faArrowRightFromBracket} className="icon" />
                             <span className="link-name">Logout</span>
                         </Link></li>
@@ -121,7 +140,7 @@ function Discover ({hash4Header, apiHeaderTime}) {
             {/* <!--MAIN CONTENT SECTION--> */}
             <section className="discover">
                 <div className="top">
-                    <FontAwesomeIcon icon={faBars} className="fa-bars" />
+                    <FontAwesomeIcon icon={faBars} className="fa-bars" onClick={handleClick}/>
 
                     <div className="search-box">
                         <FontAwesomeIcon icon={faMagnifyingGlass} className="icon" />
@@ -135,55 +154,54 @@ function Discover ({hash4Header, apiHeaderTime}) {
                     <div className="overview">
                         <div className="title">
                             <span className="text">Discover</span>
-                            <FontAwesomeIcon icon={faRadio} className="icon" />
+                            <div className="icon-div">
+                                <FontAwesomeIcon icon={faRadio} className="icon" />
+                            </div>
+                            
                         </div>
 
-                        <div className="genre-boxes">
-                            <a href="test.html" className="genre box-1" id="1">
-                                <FontAwesomeIcon icon={faMicrochip} />
-                                <span className="text">Test</span>
-                            </a>
-                            <a href="#" className="genre box-2">
-                                <FontAwesomeIcon icon={faLandmark} />
-                                <span className="text">Politics</span>
-                            </a>
-                            <a href="#" className="genre box-3">
-                                <FontAwesomeIcon icon={faDumbbell} />
-                                <span className="text">Health</span>
-                            </a>
-                            <a href="#" className="genre box-4">
-                                <FontAwesomeIcon icon={faFaceGrinTears} />
-                                <span className="text">Comedy</span>
-                            </a>
-                            <a href="#" className="genre box-5">
-                                <FontAwesomeIcon icon={faAtom} />
-                                <span className="text">Science</span>
-                            </a>
-                            <a href="#" className="genre box-6">
-                                <FontAwesomeIcon icon={faMedal} />
-                                <span className="text">Sports</span>
-                            </a>
-                            <a href="#" className="genre box-7">
-                                <FontAwesomeIcon icon={faMedal} />
-                                <span className="text">Lifestyle</span>
-                            </a>
-                            <a href="#" className="genre box-8">
-                                <FontAwesomeIcon icon={faBook} />
-                                <span className="text">Stories</span>
-                            </a>
-                            <a href="#" className="genre box-9">
-                                <FontAwesomeIcon icon={faMusic} />
-                                <span className="text">Music</span>
-                            </a>
-                            <a href="#" className="genre box-10">
-                                <FontAwesomeIcon icon={faPodcast} />
-                                <span className="text">New Releases</span>
-                            </a>
-                            <a href="#" className="genre box-11">
-                                <FontAwesomeIcon icon={faHandcuffs} />
-                                <span className="text">Crime</span>
-                            </a>
+            {/* <!--TOP CHARTS PODCAST CONTENT--> */}
+            <section className="podcasts" id="podcasts">
+                <ul className="podcast-list">
+                        {randomPodcasts.slice(6).map((podcast, index) => (
+                            <li key={index}>
+                                <a href="#" className="podcast-card" onClick={() => handlePodcastClick(podcast.enclosureUrl)}>
+                                    <figure className="card-banner">
+                                        <img src={podcast.image || podcast.feedImage} alt={`podcast-${index + 6}`} className='card-banner-img' />
+                                        <div className="card-banner-icon">
+                                            <FontAwesomeIcon icon={faCirclePlay} />
+                                        </div>
+                                    </figure>
+
+                                    <div className="card-content">
+                                        <div className="card-meta">
+                                            <time dateTime={new Date(podcast.datePublished).toISOString()}>
+                                                {new Date(podcast.datePublished).toLocaleDateString()}
+                                            </time>
+                                            <p className="pod-episode">Episode: {podcast.episode || 'N/A'}</p>
+                                        </div>
+                                        <h4>{podcast.title}</h4>
+                                    </div>
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                    {currentAudioUrl && (
+                        <div className="audio-player">
+                            <audio
+                                id="audioPlayer"
+                                ref={audioPlayerRef}
+                                controls
+                                autoPlay
+                                onEnded={handleAudioEnded}
+                            >
+                                <source src={currentAudioUrl} type="audio/mpeg" />
+                                Your browser does not support the audio element.
+                            </audio>
+                            <button className="close-btn"><FontAwesomeIcon icon={faXmark} /></button>
                         </div>
+                    )}
+            </section>
                     </div>
                 </div>
             </section>

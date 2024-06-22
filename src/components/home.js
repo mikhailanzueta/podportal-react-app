@@ -1,5 +1,5 @@
 import React from 'react'
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
 import { useNavigate, Link } from "react-router-dom";
 import './home.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,6 +10,8 @@ import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 
 function Home({hash4Header, apiHeaderTime}) {
     const [randomPodcasts, setRandomPodcasts] = useState([]);
+    const [currentAudioUrl, setCurrentAudioUrl] = useState('')
+    const audioPlayerRef = useRef(null);
 
     useEffect(() => {
         fetch('http://localhost:3000/home')
@@ -20,7 +22,34 @@ function Home({hash4Header, apiHeaderTime}) {
         })
         .catch((error) => console.error('Could not fetch your podcasts', error));
     }, []); 
+
+    const handlePodcastClick = (enclosureUrl) => {
+        if (currentAudioUrl === enclosureUrl) {
+          // If the same podcast is clicked, toggle play/pause
+          if (audioPlayerRef.current.paused) {
+            audioPlayerRef.current.play();
+          } else {
+            audioPlayerRef.current.pause();
+          }
+        } else {
+          // If a different podcast is clicked, update the URL
+          setCurrentAudioUrl(enclosureUrl);
+        }
+      };
     
+      useEffect(() => {
+        if (audioPlayerRef.current && currentAudioUrl) {
+          audioPlayerRef.current.src = currentAudioUrl;
+          audioPlayerRef.current.play();
+        }
+      }, [currentAudioUrl]);
+    
+      const handleAudioEnded = () => {
+        setCurrentAudioUrl(null);
+      }
+        
+
+
    
 
     return (
@@ -67,7 +96,7 @@ function Home({hash4Header, apiHeaderTime}) {
                 <ul className="podcast-list">
                         {randomPodcasts.slice(4).map((podcast, index) => (
                             <li key={index}>
-                                <a href="#" className="podcast-card">
+                                <a href="#" className="podcast-card" onClick={() => handlePodcastClick(podcast.enclosureUrl)}>
                                     <figure className="card-banner">
                                         <img src={podcast.image || podcast.feedImage} alt={`podcast-${index + 4}`} className='card-banner-img'/>
                                         <div className="card-banner-icon">
@@ -80,54 +109,34 @@ function Home({hash4Header, apiHeaderTime}) {
                                             <time dateTime={new Date(podcast.datePublished).toISOString()}>
                                                 {new Date(podcast.datePublished).toLocaleDateString()}
                                             </time>
-                                            <p className="pod-episode">Episodes: {podcast.episodeCount || 'N/A'}</p>
+                                            <p className="pod-episode">Episode: {podcast.episode || 'N/A'}</p>
                                         </div>
-                                        <h3>{podcast.title}</h3>
+                                        <h4>{podcast.title}</h4>
                                     </div>
                                 </a>
                             </li>
                         ))}
                     </ul>
+                    {currentAudioUrl && (
+                        <div className="audio-player">
+                        <audio
+                            id="audioPlayer"
+                            ref={audioPlayerRef}
+                            controls
+                            autoPlay
+                            onEnded={handleAudioEnded}
+                        >
+                            <source src={currentAudioUrl} type="audio/mpeg" />
+                            Your browser does not support the audio element.
+                        </audio>
+                        </div>
+                    )}
             </section>
 
-
-            {/* <!--TOP CHARTS PODCAST HEADER--> */}
-            <div class="top-charts">
-                <div class="charts-container">
-                    <h1 class="top-charts-header">Top Charts</h1>
-                </div>
-            </div>
-
-            {/* <!--TOP CHARTS PODCAST CONTENT--> */}
-            <section className="podcasts" id="podcasts">
-                <ul className="podcast-list">
-                        {randomPodcasts.slice(4).map((podcast, index) => (
-                            <li key={index}>
-                                <a href="#" className="podcast-card">
-                                    <figure className="card-banner">
-                                        <img src={podcast.image || podcast.feedImage} alt={`podcast-${index + 4}`} className='card-banner-img' />
-                                        <div className="card-banner-icon">
-                                            <FontAwesomeIcon icon={faCirclePlay} />
-                                        </div>
-                                    </figure>
-
-                                    <div className="card-content">
-                                        <div className="card-meta">
-                                            <time dateTime={new Date(podcast.datePublished).toISOString()}>
-                                                {new Date(podcast.datePublished).toLocaleDateString()}
-                                            </time>
-                                            <p className="pod-episode">Episodes: {podcast.episodeCount || 'N/A'}</p>
-                                        </div>
-                                        <h3>{podcast.title}</h3>
-                                    </div>
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-            </section>
+           
 
 
-            {/* <!--DISCOVER AND CREATE--> */}
+            {/* <!--DISCOVER AND CREATE-->
             <div className="content-container">
                 <div className="content">
                     <div className="discover-playlist">
@@ -156,7 +165,7 @@ function Home({hash4Header, apiHeaderTime}) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             {/* <!--FOOTER SECTION--> */}
             <footer>

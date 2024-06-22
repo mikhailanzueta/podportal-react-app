@@ -38,6 +38,7 @@ function App() {
   return (
     <div className='App'>
       <Routes>
+        <Route path='/' element={<Home />} />
         <Route path='/discover' element={<Discover />} />
         <Route path='/library' element={<Library />} />
         <Route path='/signup' element={<Signup  user={user} setUser={setUser}/>}/>
