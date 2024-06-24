@@ -2,23 +2,18 @@ import React, {useState, useEffect} from "react";
 import { useNavigate } from 'react-router-dom';
 import './signup.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
-import { faLock, faEyeSlash, faUser, faAt, faEye } from '@fortawesome/free-solid-svg-icons';
+// import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
+import { faLock, faUser, faAt, } from '@fortawesome/free-solid-svg-icons';
 
 
 function Signup({user, setUser}) {
-
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
         username: '',
         password: ''
     });
-
-
-    const navigate = useNavigate();
-
-    
     
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -54,12 +49,12 @@ function Signup({user, setUser}) {
             if (response.status === 400) {
                 throw new Error('Username already exists');
             }
-            response.json()})
+            return response.json()})
           .then((result) => {
             console.log("result :>> ", result);
             localStorage.setItem("user", JSON.stringify(result.data));
             setUser(result.data); // Update user state
-            // navigate("/home");
+            navigate("/home");
           })
           .catch((error) => {
             console.log(error)

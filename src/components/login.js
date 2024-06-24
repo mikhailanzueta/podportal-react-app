@@ -3,12 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import './login.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
-import { faLock, faEyeSlash, faUser, faAt, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faLock, faAt } from '@fortawesome/free-solid-svg-icons';
 
 function Login({user, setUser}) {
-
     const navigate = useNavigate();
-
     const [formData, setFormData] = useState({
         username: '',
         password: ''
@@ -22,14 +20,11 @@ function Login({user, setUser}) {
         });
     };
 
-
     const loginFormSubmission = (e) => {
         e.preventDefault();
         console.log(`This method ran.`)
         console.log(e.target.username.value)
         console.log(e.target.password.value)
-
-        
 
         const body = {
             username: e.target.username.value,
@@ -38,13 +33,18 @@ function Login({user, setUser}) {
 
         fetch("http://localhost:3000/auth/login/local",{
             method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(body)
         })
             .then((response) => response.json())
             .then((result) => {
+                console.log(result)
                 if (result.statusCode === 200) {
                     console.log('Success!')
                     localStorage.setItem('user', JSON.stringify(result.data))
+                    setUser(result.data)
                     navigate('/discover')
                 } else {
                     console.log("Something went wrong!")

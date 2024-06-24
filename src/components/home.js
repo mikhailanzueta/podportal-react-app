@@ -3,7 +3,7 @@ import {useState, useEffect, useRef} from 'react'
 import { useNavigate, Link } from "react-router-dom";
 import './home.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faArrowRight, faCirclePlay, faXmark  } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faArrowRight, faCirclePlay, faXmark, faPlus  } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faInstagram, faTwitter, faSpotify } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 
@@ -47,6 +47,28 @@ function Home({hash4Header, apiHeaderTime}) {
       const handleAudioEnded = () => {
         setCurrentAudioUrl(null);
       }
+      
+    // functionality for 'add' button to add podcasts to playlist:
+    const handleAddToPlaylist = async () => {
+        try {
+            const response = await fetch(`/playlist/:playlistId/podcast/:podcastId`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+    
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+    
+            const data = await response.json();
+            console.log('Podcast added to playlist:', data);
+            // Optionally, update the UI to show the podcast was added
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
+        }
+    };  
         
 
 
@@ -106,9 +128,12 @@ function Home({hash4Header, apiHeaderTime}) {
 
                                     <div className="card-content">
                                         <div className="card-meta">
-                                            <time dateTime={new Date(podcast.datePublished).toISOString()}>
+                                            <time dateTime={new Date(podcast.datePublished).toISOString()}> 
                                                 {new Date(podcast.datePublished).toLocaleDateString()}
                                             </time>
+                                            <button type="button" className="add-button" onClick={() => handleAddToPlaylist(podcast.id)}>
+                                                <FontAwesomeIcon icon={faPlus} />
+                                            </button>
                                             <p className="pod-episode">Episode: {podcast.episode || 'N/A'}</p>
                                         </div>
                                         <h4>{podcast.title}</h4>

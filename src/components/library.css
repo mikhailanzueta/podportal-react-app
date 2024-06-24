@@ -241,72 +241,55 @@ body {
     color: var(--anti-flash-white);
 }
 
-/* PLAYLIST CONTENT CSS */
-.playlist .playlist-activity {
-    padding-top: 120px;
-}
-
-.playlist-activity .overview {
-    margin: 0 25px;
-}
-
-.playlist-activity .title {
-    display: flex;
-    align-items: center;
-    margin: 60px 0 30px 0;
-}
-
-.playlist-activity .title .text {
-    color: var(--anti-flash-white);
-    font-size: 35px;
-    font-weight: 600;
-    font-family: "Roboto Condensed";
-    letter-spacing: 1px;
-    margin-left: 20px;
-}
-
-.playlist-activity .title i {
-    position: relative;
+.playlist-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 40px;
-    width: 40px;
-    background-color: var(--gunmetal);
-    color: var(--anti-flash-white);
-    font-size: 26px;
-    border-radius: 6px;
-    left: 16px;
-    top: 1px;
-}
-
-.playlist .playlist-activity .playlist-data {
-    display: flex;
-    background-color: var(--gunmetal);
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    color: var(--anti-flash-white);
-    padding: 0 20px 0 20px;
-}
-
-.playlist-activity .playlist-data {
-    display: flex;
-    /*width: calc(100% / 4 - 15px);*/
-}
-
-.playlist-data .data-list {
-    display: flex;
     flex-direction: column;
-    color: var(--anti-flash-white);
-    font-size: 17px;
-    margin-top: 20px;
-    white-space: nowrap;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    z-index: 1;
 }
 
-.playlist-data .data-title {
-    font-size: 20px;
-    font-weight: 500;
-    font-family: "Roboto Condensed";
+.form-group {
+    margin-bottom: 15px;
+    width: 100%;
 }
 
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-group button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-group button:hover {
+    background-color: #0056b3;
+}

@@ -12,10 +12,11 @@ import {
     faBars,
     faMagnifyingGlass,
     faCircleUser,
-    faCirclePlay
   } from '@fortawesome/free-solid-svg-icons';
 
 function Library() {
+    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
 
     useEffect(() => {
         // This function runs after the component is mounted
@@ -27,50 +28,25 @@ function Library() {
             bars.addEventListener('click', () => {
                 sideMenu.classList.toggle("close");
             });
-
-
         };
-
         // Call the function to set up event listener
         handleClick();
-
         // Empty dependency array ensures this effect runs only once after initial render
     }, []);
 
-      // Base URL for the Podcast Index API
-//   const baseUrl = 'https://api.podcastindex.org/api/1.0';
-//   // Example endpoint: Search for a podcast by term
-//   const endpoint = '/search/byterm';
-//   // Query parameters
-//   const params = new URLSearchParams({
-//     q: 'technology' // Example search term
-//   });
-//   // Full URL with endpoint and query parameters
-//   const url = `${baseUrl}${endpoint}?${params.toString()}`;
+    // const handleAddPlaylist = (e) => {
+    //     e.preventDefault();
+    //     console.log(e.target.title.value)
+    //     console.log(e.target.description.value)
 
-//   const [query, setQuery] = useState("")
-//   // create a handler function for search bar and update the state
-//   const handleInputChange = (e) => {
-//     setQuery(e.target.value)
-//     // use fetch hook for state changes
+
+
+        
+    //     }
+       
+    // }
+
     
-//   }
-  // create a handler function that calls the fetch request to the api when the uer presses the 'enter' key
-//   const handleKeyPress = (e) => {
-//     if (e.key === 'Enter') {
-//       fetch(url, {
-//         method: "GET",
-//         headers: {
-//           'X-Auth-Key': process.env.REACT_APP_API_KEY,
-//           'X-Auth-Secret': process.env.REACT_REACT_API_SECRET_KEY,
-//           "content-type": "application/json"
-//         }
-//       })
-//         .then((response) => response.json())
-//         .then(result => console.log(result.data))
-//         .catch((error) => console.log('Error fetching data: ', error))
-//     }
-//   }
     return (
         <div>
             <nav className="navigation">
@@ -124,31 +100,25 @@ function Library() {
                     <FontAwesomeIcon icon={faCircleUser} id="user-profile" className="icon"></FontAwesomeIcon>
                 </div>
 
-                <div className="playlist-activity">
-                    <div className="title">
-                        <span className="text">Playlist Activity</span>
-                        <FontAwesomeIcon icon={faCirclePlay} className="icon"></FontAwesomeIcon>
-                    </div>
 
-                    <div className="playlist-data">
-                        <div className="data-names">
-                            <span className="data-title">Podcast</span>
-                            <span className="data-list">Joe Rogan Podcast</span>
-                        </div>
-                        <div className="data-episode">
-                            <span className="data-title">Episode</span>
-                            <span className="data-list">09</span>
-                        </div>
-                        <div className="data-genre">
-                            <span className="data-title">Genre</span>
-                            <span className="data-list">Politics</span>
-                        </div>
-                        <div className="data-status">
-                            <span className="data-title">Status</span>
-                            <span className="data-list">Saved</span>
-                        </div>
+                
+                    <div className="playlist-container">
+                        <h2>Create a New Playlist</h2>
+                        <form id="playlistForm">
+                            <div className="form-group">
+                                <label for="title">Playlist Title:</label>
+                                <input type="text" id="title" name="title" required />
+                            </div>
+                            <div className="form-group">
+                                <label for="description">Description:</label>
+                                <textarea id="description" name="description" required></textarea>
+                            </div>
+                            <div className="form-group">
+                                <button type="submit">Create Playlist</button>
+                            </div>
+                        </form>
                     </div>
-                </div>
+                    
             </section>
         </div>
     )

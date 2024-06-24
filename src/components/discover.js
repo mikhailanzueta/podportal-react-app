@@ -15,7 +15,8 @@ import {
     faCircleUser,
     faRadio,
     faCirclePlay,
-    faXmark
+    faXmark,
+    faPlus
   } from '@fortawesome/free-solid-svg-icons';
 
 function Discover ({hash4Header, apiHeaderTime}) {
@@ -24,21 +25,6 @@ function Discover ({hash4Header, apiHeaderTime}) {
     const [menuToggle, setMenuToggle] = useState(false)
     const audioPlayerRef = useRef(null);
     const navigate = useNavigate()
-
-    // const handleLogout = () => {
-
-    //     fetch(`http://localhost:3000/logout`, {
-    //       method: "POST",
-    //     })
-    //         .then((response) => response.json())
-    //         .then((result) => {
-    //             console.log('User is logged out')
-    //             localStorage.removeItem('user')
-    //             navigate('/home')
-    //         })
-    //         .catch((error) => console.log('There was a problem logging out the user: ', error))
-        
-    // }
 
     useEffect(() => {
         fetch('http://localhost:3000/discover/podcasts')
@@ -95,6 +81,27 @@ function Discover ({hash4Header, apiHeaderTime}) {
         setCurrentAudioUrl(null);
       }
 
+      // functionality for 'add' button to add podcasts to playlist:
+    const handleAddToPlaylist = async () => {
+        try {
+            const response = await fetch(`/playlist/:playlistId/podcast/:podcastId`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+    
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+    
+            const data = await response.json();
+            console.log('Podcast added to playlist:', data);
+            // Optionally, update the UI to show the podcast was added
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
+        }
+    };  
     
 
     return (
@@ -178,9 +185,13 @@ function Discover ({hash4Header, apiHeaderTime}) {
                                             <time dateTime={new Date(podcast.datePublished).toISOString()}>
                                                 {new Date(podcast.datePublished).toLocaleDateString()}
                                             </time>
+                                            <button type="button" className="add-button" onClick={() => handleAddToPlaylist(podcast.id)}>
+                                                <FontAwesomeIcon icon={faPlus} />
+                                            </button>
                                             <p className="pod-episode">Episode: {podcast.episode || 'N/A'}</p>
                                         </div>
                                         <h4>{podcast.title}</h4>
+                                        
                                     </div>
                                 </a>
                             </li>
