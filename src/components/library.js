@@ -15,8 +15,10 @@ import {
   } from '@fortawesome/free-solid-svg-icons';
 
 function Library() {
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
+    const [formData, setFormData] = useState({
+        title: '',
+        description: ''
+    });
 
     useEffect(() => {
         // This function runs after the component is mounted
@@ -34,17 +36,44 @@ function Library() {
         // Empty dependency array ensures this effect runs only once after initial render
     }, []);
 
-    // const handleAddPlaylist = (e) => {
-    //     e.preventDefault();
-    //     console.log(e.target.title.value)
-    //     console.log(e.target.description.value)
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
 
+    const handleCreatePlaylist = (e) => {
+        e.preventDefault();
+        console.log(e.target.name.value)
+        console.log(e.target.description.value)
 
+        const body = {
+            name: e.target.name.value,
+            description: e.target.description.value
+        }
 
-        
-    //     }
+            fetch('http://localhost:3000/playlist/create', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(body),
+            })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log(result)
+                if(result.statusCode === 200) {
+                    console.log('Playlist created!')
+                    return result
+                } else {
+                    console.log('Something went wrong')
+                }
+            })
+            .catch((error) => console.log("There was a problem fetching the data:", error))
        
-    // }
+    }
 
     
     return (
@@ -104,17 +133,17 @@ function Library() {
                 
                     <div className="playlist-container">
                         <h2>Create a New Playlist</h2>
-                        <form id="playlistForm">
-                            <div className="form-group">
-                                <label for="title">Playlist Title:</label>
-                                <input type="text" id="title" name="title" required />
+                        <form id="playlistForm" onSubmit={handleCreatePlaylist}>
+                            <div className="form-group" >
+                                <label for="name">Playlist Name:</label>
+                                <input type="text" id="name" name="name"  required />
                             </div>
                             <div className="form-group">
                                 <label for="description">Description:</label>
-                                <textarea id="description" name="description" required></textarea>
+                                <textarea id="description" name="description"  required></textarea>
                             </div>
                             <div className="form-group">
-                                <button type="submit">Create Playlist</button>
+                                <button type="submit" >Create Playlist</button>
                             </div>
                         </form>
                     </div>

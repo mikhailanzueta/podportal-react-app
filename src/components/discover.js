@@ -51,9 +51,6 @@ function Discover ({hash4Header, apiHeaderTime}) {
             sideMenu.classList.toggle("close");
             setMenuToggle(!menuToggle)
         });
-        
-
-
     };
 
     const handlePodcastClick = (enclosureUrl) => {
@@ -82,17 +79,20 @@ function Discover ({hash4Header, apiHeaderTime}) {
       }
 
       // functionality for 'add' button to add podcasts to playlist:
-    const handleAddToPlaylist = async () => {
+    const handleAddToPlaylist = async (playlistId, podcastId) => {
         try {
-            const response = await fetch(`/playlist/:playlistId/podcast/:podcastId`, {
+            const response = await fetch(`http://localhost:3000/playlist/${playlistId}/podcast/${podcastId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
+            
             });
-    
+            console.log(response)
+            console.log(playlistId)
+            console.log(podcastId)
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                throw new Error('Response was not ok');
             }
     
             const data = await response.json();
@@ -102,6 +102,8 @@ function Discover ({hash4Header, apiHeaderTime}) {
             console.error('There was a problem with the fetch operation:', error);
         }
     };  
+
+    
     
 
     return (
