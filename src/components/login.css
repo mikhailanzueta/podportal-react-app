@@ -1,0 +1,123 @@
+/* FORM CSS */
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+
+
+:root {
+    --grey: #A2A7A5;
+    --white: #FFFFFF;
+    --light-mint: #B6D0C7;
+    --black: #000000;
+    --anti-flash-white: #EFEFF0;
+    --dark-purple: #27233A;
+    --davys-gray: #505168;
+    --gunmetal: #292F36;
+    --rick-black: #0D0C1D;
+
+    /* Transitions */
+    --tran-05: all 0.5s ease;
+    --tran-03: all 0.3s ease;
+    --tran-02: all 0.2s ease;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 200px;
+    width: 600px;
+    background: var(--anti-flash-white);
+    padding-bottom: 30px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    margin-top: 25px;
+}
+
+.text {
+    font-size: 30px;
+    font-family: "Roboto Condensed";
+    font-weight: 600;
+
+}
+
+.underline {
+    width: 60px;
+    height: 6px;
+    background: var(--dark-purple);
+    border-radius: 8px;
+}
+
+.inputs {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.input {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    width: 480px;
+    height: 50px;
+    background: transparent;
+    border-radius: 0px;
+    border-bottom: 1px solid var(--dark-purple);
+    outline: none;
+}
+
+.input .icon {
+    font-size: 20px;
+    margin: 0px 30px;
+    color: var(--dark-purple);
+}
+
+
+.input input {
+    height: 50px;
+    width: 400px;
+    background: transparent;
+    outline: none;
+    border: none;
+    color: var(--dark-purple);
+    font-size: 16px;
+}
+
+.forgot-password {
+    margin: auto;
+    margin-top: 27px;
+    color: var(--dark-purple);
+    font-family: "Roboto Condensed";
+    font-size: 16px;
+}
+
+.forgot-password span {
+    color: var(--dark-purple);
+    cursor: pointer;
+}
+
+.submit-container {
+    display: flex;
+    gap: 30px;
+    margin: 60px auto;
+}
+
+.submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 220px;
+    height: 60px;
+    color: var(--anti-flash-white);
+    background: var(--dark-purple);
+    border-radius: 50px;
+    font-size: 19px;
+    font-weight: 600;
+     cursor: pointer;
+}
