@@ -89,8 +89,8 @@ function Discover ({hash4Header, apiHeaderTime}) {
             
             });
             console.log(response)
-            console.log(playlistId)
-            console.log(podcastId)
+            console.log("Playlist id: ", playlistId)
+            console.log("Podcast id: ", podcastId)
             if (!response.ok) {
                 throw new Error('Response was not ok');
             }
@@ -193,7 +193,6 @@ function Discover ({hash4Header, apiHeaderTime}) {
                                             <p className="pod-episode">Episode: {podcast.episode || 'N/A'}</p>
                                         </div>
                                         <h4>{podcast.title}</h4>
-                                        
                                     </div>
                                 </a>
                             </li>
