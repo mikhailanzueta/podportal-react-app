@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Routes, Route } from "react-router-dom";
 import Discover from './components/discover'
 import Library from './components/library'
