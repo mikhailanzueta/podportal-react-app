@@ -166,7 +166,7 @@ body {
 }
 
 
-/* DISCOVER SECTION CSS */
+
 .discover {
     position: relative;
     background: var(--black);
@@ -241,7 +241,7 @@ body {
     color: var(--anti-flash-white);
 }
 
-/* DISCOVER CONTENT CSS */
+
 .discover .discover-content {
     padding-top: 120px;
 }
@@ -313,9 +313,9 @@ body {
     display: block;
     width: 100%;
     height: auto;
-    max-height: 200px; /* Adjust this value to the maximum height you want */
-    object-fit: cover; /* Ensures the image covers the entire space */
-    border-radius: 8px; /* Example: Adds rounded corners */
+    max-height: 200px; 
+    object-fit: cover; 
+    border-radius: 8px; 
 }
 
 .card-banner::before {
@@ -409,7 +409,7 @@ body {
     bottom: -12px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #f1f1f1; /* Optional: for visibility */
+    background-color: #f1f1f1; 
     border-radius: 50px;
 }
 
