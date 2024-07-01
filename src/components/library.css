@@ -1,4 +1,4 @@
-/* LIBRARY CSS */
+
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root {
@@ -12,13 +12,13 @@
     --gunmetal: #292F36;
     --rick-black: #0D0C1D;
 
-    /* transition */
+
     --transition: 0.25s ease-in-out;
 
-    /* padding */
+
     --section-padding: 30px;
 
-    /* gradient color */
+
     --flourescent-blue: hsl(178, 100%, 49%);
     --heliotrope-gray: hsl(253, 15%, 70%);
     --russian-violet: hsl(252, 80%, 16%);
@@ -28,7 +28,6 @@
     --white: hsl(0, 0%, 100%);
     --gradient: linear-gradient(to right, var(--flourescent-blue), var(--blue-ryb));
 
-    /* Transitions */
     --tran-05: all 0.5s ease;
     --tran-03: all 0.3s ease;
     --tran-02: all 0.2s ease;
@@ -45,7 +44,7 @@ body {
     background-color: var(--anti-flash-white);
 }
 
-/* NAVIGATION CSS */
+
 .navigation {
     position: fixed;
     top: 0;
@@ -166,7 +165,7 @@ body {
     background-color: var(--light-mint);
 }
 
-/* DISCOVER SECTION CSS */
+
 .playlist {
     position: relative;
     background: var(--black);

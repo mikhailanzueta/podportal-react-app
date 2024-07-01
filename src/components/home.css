@@ -9,13 +9,13 @@
     --gunmetal: #292F36;
     --rick-black: #0D0C1D;
 
-    /* transition */
+    
     --transition: 0.25s ease-in-out;
 
-    /* padding */
+    
     --section-padding: 30px;
 
-    /* gradient color */
+    
     --flourescent-blue: hsl(178, 100%, 49%);
     --heliotrope-gray: hsl(253, 15%, 70%);
     --russian-violet: hsl(252, 80%, 16%);
@@ -26,8 +26,7 @@
     --gradient: linear-gradient(to right, var(--flourescent-blue), var(--blue-ryb));
 }
 
-/* <uniquifier>: Use a uniquifier for the class name
-// <weight>: Use a value from 100 to 900 */
+
 
 .roboto-condensed {
   font-family: "Roboto Condensed", sans-serif;
@@ -53,7 +52,7 @@ body {
     background-repeat: no-repeat;
 }
 
-/* NAVIGATION CONTENT */
+
 .navbar-container {
     display: flex;
     background-color: var(--black);
@@ -114,9 +113,7 @@ body {
     height: 2px;
     width: 100%;
 }
-/* END OF NAVIGATION CSS /*
 
-/* HERO SECTION CSS */
 .hero {
     padding: 150px 0 var(--section-padding);
     display: flex;
@@ -196,7 +193,7 @@ body {
 }
 
 
-/* FEATURED AND TOP CHARTS PODCAST CSS */
+
 .featured-container {
     display: flex;
     justify-content: center;
@@ -248,9 +245,9 @@ body {
     display: block;
     width: 100%;
     height: auto;
-    max-height: 200px; /* Adjust this value to the maximum height you want */
-    object-fit: cover; /* Ensures the image covers the entire space */
-    border-radius: 8px; /* Example: Adds rounded corners */
+    max-height: 200px; 
+    object-fit: cover; 
+    border-radius: 8px; 
 }
 
 .card-banner::before {
@@ -343,7 +340,7 @@ body {
     bottom: -12px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #f1f1f1; /* Optional: for visibility */
+    background-color: #f1f1f1; 
     border-radius: 50px;
     z-index: 1;
 }
@@ -351,9 +348,7 @@ body {
 audio {
     display: block;
 }
-/* END OF FEATURED AND TOP CHARTS CSS */
 
-/* Discover and Create */
 .content-container {
     display: flex;
     justify-content: center;
@@ -440,10 +435,7 @@ audio {
     opacity: 0;
     transition: 0.5s;
 }
-/* END OF DISCOVER AND CREATE CSS */
 
-
-/* HAMBURGER ICON CSS */
 .check-btn, .close-menu {
     display: flex;
     align-items: flex-end;
@@ -464,7 +456,7 @@ audio {
     display: none;
 }
 
-/* FOOTER SECTION */
+
 footer {
     width: 100%;
     position: relative;
@@ -585,10 +577,7 @@ hr {
 }
 
 
-/* END OF HAMBURGER ICON CSS*/
 
-
-/* CSS MEDIA QUERIES */
 @media screen and (max-width: 320px) {
     .check-btn {
         font-size: 24px;

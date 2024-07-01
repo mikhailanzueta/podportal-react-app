@@ -1,5 +1,3 @@
-/* FORM CSS */
-
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
 
 
@@ -14,7 +12,7 @@
     --gunmetal: #292F36;
     --rick-black: #0D0C1D;
 
-    /* Transitions */
+
     --tran-05: all 0.5s ease;
     --tran-03: all 0.3s ease;
     --tran-02: all 0.2s ease;
