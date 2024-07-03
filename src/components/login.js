@@ -31,7 +31,7 @@ function Login({user, setUser}) {
             password: e.target.password.value
         }
 
-        fetch("http://localhost:3000/auth/login/local",{
+        fetch("https://personal-project-podportal-1.onrender.com/",{
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

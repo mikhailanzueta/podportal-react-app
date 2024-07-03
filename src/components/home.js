@@ -14,7 +14,7 @@ function Home({hash4Header, apiHeaderTime}) {
     const audioPlayerRef = useRef(null);
 
     useEffect(() => {
-        fetch('http://localhost:3000/home')
+        fetch('https://personal-project-podportal-1.onrender.com/')
         .then((response) => response.json())
         .then((data) => {
             console.log('Random Podcasts:', data);

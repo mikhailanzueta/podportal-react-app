@@ -37,7 +37,7 @@ function Signup({user, setUser}) {
     
         console.log('body :>> ', body);
     
-        fetch(`http://localhost:3000/auth/signup`, {
+        fetch(`https://personal-project-podportal-1.onrender.com/`, {
           method: "POST",
           headers: {
             'Content-Type': 'application/json'

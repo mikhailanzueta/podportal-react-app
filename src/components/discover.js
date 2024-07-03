@@ -27,7 +27,7 @@ function Discover ({hash4Header, apiHeaderTime}) {
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetch('http://localhost:3000/discover/podcasts')
+        fetch('https://personal-project-podportal-1.onrender.com/')
         .then((response) => response.json())
         .then((data) => {
             console.log('Random Podcasts:', data);
@@ -81,7 +81,7 @@ function Discover ({hash4Header, apiHeaderTime}) {
       // functionality for 'add' button to add podcasts to playlist:
     const handleAddToPlaylist = async (playlistId, podcastId) => {
         try {
-            const response = await fetch(`http://localhost:3000/playlist/${playlistId}/podcast/${podcastId}`, {
+            const response = await fetch(`https://personal-project-podportal-1.onrender.com/`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
