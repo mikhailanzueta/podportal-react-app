@@ -14,13 +14,14 @@ function Home({hash4Header, apiHeaderTime}) {
     const audioPlayerRef = useRef(null);
 
     useEffect(() => {
-        fetch('https://personal-project-podportal-1.onrender.com/')
+        fetch('https://personal-project-podportal-1.onrender.com/home')
         .then((response) => response.json())
         .then((data) => {
             console.log('Random Podcasts:', data);
-            setRandomPodcasts(data.data); // Set the fetched random podcasts to state
+            setRandomPodcasts(data.data || []); // Set the fetched random podcasts to state
         })
         .catch((error) => console.error('Could not fetch your podcasts', error));
+        setRandomPodcasts([])
     }, []); 
 
     const handlePodcastClick = (enclosureUrl) => {
@@ -116,7 +117,7 @@ function Home({hash4Header, apiHeaderTime}) {
             {/* <!--FEATURED PODCAST CONTENT--> */}
             <section className="podcasts" id="podcasts">
                 <ul className="podcast-list">
-                        {randomPodcasts.slice(4).map((podcast, index) => (
+                        {Array.isArray(randomPodcasts) && randomPodcasts.slice(4).map((podcast, index) => (
                             <li key={index}>
                                 <a href="#" className="podcast-card" onClick={() => handlePodcastClick(podcast.enclosureUrl)}>
                                     <figure className="card-banner">

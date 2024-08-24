@@ -27,11 +27,11 @@ function Discover ({hash4Header, apiHeaderTime}) {
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetch('https://personal-project-podportal-1.onrender.com/')
+        fetch('https://personal-project-podportal-1.onrender.com/podcasts')
         .then((response) => response.json())
         .then((data) => {
             console.log('Random Podcasts:', data);
-            setRandomPodcasts(data.data); // Set the fetched random podcasts to state
+            setRandomPodcasts(data.data || []); // Set the fetched random podcasts to state
         })
         .catch((error) => console.error('Could not fetch your podcasts', error));
     }, []); 
@@ -168,6 +168,7 @@ function Discover ({hash4Header, apiHeaderTime}) {
                             </div>
                             
                         </div>
+                
 
             {/* <!--TOP CHARTS PODCAST CONTENT--> */}
             <section className="podcasts" id="podcasts">
